@@ -36,10 +36,10 @@ services.AddAuthentication(auth =>
         //What to validate, when it expires,etc
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidAudience = "http://ahmadmozaffar.net",
-        ValidIssuer = "http://ahmadmozaffar.net",
+        ValidAudience = configuration["AuthSettings:Audience"],
+        ValidIssuer = configuration["AuthSettings:Issuer"],
         RequireExpirationTime = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Key in encryption"))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AuthSettings:Key"]))
     };
 });
 
@@ -62,6 +62,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
