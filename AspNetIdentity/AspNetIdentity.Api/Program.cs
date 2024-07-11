@@ -1,4 +1,5 @@
 using AspNetIdentity.Api.Models;
+using AspNetIdentity.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,9 @@ services.AddAuthentication(auth =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Key in encryption"))
     };
 });
+
+//Interfaces
+services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
