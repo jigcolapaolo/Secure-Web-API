@@ -88,17 +88,17 @@
             label2.AutoSize = true;
             label2.Font = new Font("ROG Fonts", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Tomato;
-            label2.Location = new Point(323, 9);
+            label2.Location = new Point(286, 45);
             label2.Name = "label2";
-            label2.Size = new Size(136, 38);
+            label2.Size = new Size(225, 38);
             label2.TabIndex = 5;
-            label2.Text = "LOGIN";
+            label2.Text = "REGISTER";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.MediumBlue;
+            BackColor = Color.RoyalBlue;
             ClientSize = new Size(800, 450);
             Controls.Add(label2);
             Controls.Add(label1);
