@@ -50,6 +50,7 @@ namespace AspNetIdentity.Client
                 MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 string accessToken = responseObject.Message;
 
+                //If authorized, gets access to protected resource
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
                 var response1 = await client.GetAsync("https://localhost:7101/WeatherForecast");
                 var responseBody1 = await response1.Content.ReadAsStringAsync();
@@ -63,6 +64,7 @@ namespace AspNetIdentity.Client
                     item.SubItems.Add(forecast.TemperatureF.ToString());
                     lstWeatherForecast.Items.Add(item);
                 }
+
             }
             else
             {

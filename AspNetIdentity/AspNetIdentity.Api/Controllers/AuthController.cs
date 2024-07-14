@@ -2,6 +2,7 @@
 using AspNetIdentity.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 
 namespace AspNetIdentity.Api.Controllers
 {
@@ -10,10 +11,14 @@ namespace AspNetIdentity.Api.Controllers
     public class AuthController : ControllerBase
     {
         private IUserService _userService;
+        private IMailService _mailService;
 
-        public AuthController(IUserService userService)
+        public AuthController(
+            IUserService userService,
+            IMailService mailService)
         {
             _userService = userService;
+            _mailService = mailService;
         }
 
         // /api/auth/register
@@ -42,7 +47,11 @@ namespace AspNetIdentity.Api.Controllers
                 var result = await _userService.LoginUserAsync(model);
 
                 if (result.IsSuccess)
+                {
+                    await _mailService.SendEmailAsync("Jinbyos@Gmail.com", "Inicio de Sesión", _mailService.GetNewLoginNotification());
+
                     return Ok(result);
+                }
 
                 return BadRequest(result);
             }
