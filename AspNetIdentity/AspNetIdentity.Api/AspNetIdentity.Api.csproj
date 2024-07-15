@@ -28,8 +28,4 @@
     <ProjectReference Include="..\AspNetIdentity.Shared\AspNetIdentity.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>

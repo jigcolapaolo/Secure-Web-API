@@ -34,6 +34,7 @@
             txtConfirmPassword = new TextBox();
             label1 = new Label();
             label2 = new Label();
+            btnLoginForm = new Button();
             SuspendLayout();
             // 
             // btnRegister
@@ -94,12 +95,23 @@
             label2.TabIndex = 5;
             label2.Text = "REGISTER";
             // 
+            // btnLoginForm
+            // 
+            btnLoginForm.Location = new Point(349, 318);
+            btnLoginForm.Name = "btnLoginForm";
+            btnLoginForm.Size = new Size(100, 23);
+            btnLoginForm.TabIndex = 6;
+            btnLoginForm.Text = "Go to Login";
+            btnLoginForm.UseVisualStyleBackColor = true;
+            btnLoginForm.Click += btnLoginForm_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RoyalBlue;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnLoginForm);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(txtConfirmPassword);
@@ -120,5 +132,6 @@
         private TextBox txtConfirmPassword;
         private Label label1;
         private Label label2;
+        private Button btnLoginForm;
     }
 }

@@ -6,6 +6,7 @@ namespace AspNetIdentity.Client
 {
     public partial class Form1 : Form
     {
+        private Form2 form2;
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace AspNetIdentity.Client
             var response = await client.PostAsync("https://localhost:7101/api/auth/register", content);
 
             var responseBody = await response.Content.ReadAsStringAsync();
-            
+
             var responseObject = JsonConvert.DeserializeObject<UserManagerResponse>(responseBody);
 
             if (responseObject.IsSuccess)
@@ -48,6 +49,15 @@ namespace AspNetIdentity.Client
                 }
             }
 
+        }
+
+        private void btnLoginForm_Click(object sender, EventArgs e)
+        {
+            if (form2 == null || form2.IsDisposed)
+                form2 = new Form2();
+
+            form2.Show();
+            this.Hide();
         }
     }
 }

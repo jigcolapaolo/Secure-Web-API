@@ -14,6 +14,8 @@ namespace AspNetIdentity.Client
 {
     public partial class Form2 : Form
     {
+        private Form1 form1;
+
         public Form2()
         {
             InitializeComponent();
@@ -55,7 +57,7 @@ namespace AspNetIdentity.Client
                 var response1 = await client.GetAsync("https://localhost:7101/WeatherForecast");
                 var responseBody1 = await response1.Content.ReadAsStringAsync();
                 var weatherForecasts = JsonConvert.DeserializeObject<IEnumerable<WeatherForecast>>(responseBody1);
-                
+
                 foreach (var forecast in weatherForecasts)
                 {
                     ListViewItem item = new ListViewItem(forecast.Date.ToString());
@@ -76,5 +78,13 @@ namespace AspNetIdentity.Client
             }
         }
 
+        private void btnRegisterForm_Click(object sender, EventArgs e)
+        {
+            if (form1 == null || form1.IsDisposed)
+                form1 = new Form1();
+
+            form1.Show();
+            this.Hide();
+        }
     }
 }

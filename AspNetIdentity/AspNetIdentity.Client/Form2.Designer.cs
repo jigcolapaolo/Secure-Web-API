@@ -33,6 +33,7 @@
             txtEmail = new TextBox();
             btnLogin = new Button();
             lstWeatherForecast = new ListView();
+            btnRegisterForm = new Button();
             SuspendLayout();
             // 
             // loginLbl
@@ -66,7 +67,7 @@
             // btnLogin
             // 
             btnLogin.Cursor = Cursors.Hand;
-            btnLogin.Location = new Point(143, 206);
+            btnLogin.Location = new Point(141, 206);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(75, 23);
             btnLogin.TabIndex = 6;
@@ -82,12 +83,23 @@
             lstWeatherForecast.TabIndex = 11;
             lstWeatherForecast.UseCompatibleStateImageBehavior = false;
             // 
+            // btnRegisterForm
+            // 
+            btnRegisterForm.Location = new Point(130, 305);
+            btnRegisterForm.Name = "btnRegisterForm";
+            btnRegisterForm.Size = new Size(100, 23);
+            btnRegisterForm.TabIndex = 12;
+            btnRegisterForm.Text = "Go to Register";
+            btnRegisterForm.UseVisualStyleBackColor = true;
+            btnRegisterForm.Click += btnRegisterForm_Click;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.MenuHighlight;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnRegisterForm);
             Controls.Add(lstWeatherForecast);
             Controls.Add(loginLbl);
             Controls.Add(txtPassword);
@@ -108,5 +120,6 @@
         private TextBox txtEmail;
         private Button btnLogin;
         private ListView lstWeatherForecast;
+        private Button btnRegisterForm;
     }
 }
