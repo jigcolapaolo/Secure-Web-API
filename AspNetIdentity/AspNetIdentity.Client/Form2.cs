@@ -70,10 +70,11 @@ namespace AspNetIdentity.Client
             }
             else
             {
-                if (responseObject.Errors != null && responseObject.Errors.Any())
-                {
-                    MessageBox.Show(responseObject.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                //if (responseObject.Errors != null && responseObject.Errors.Any())
+                //{
+                //    MessageBox.Show(responseObject.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
+                MessageBox.Show(responseObject.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }
@@ -85,6 +86,26 @@ namespace AspNetIdentity.Client
 
             form1.Show();
             this.Hide();
+        }
+
+        private async void btnForgetPw_Click(object sender, EventArgs e)
+        {
+            HttpClient client = new HttpClient();
+
+            var model = new ForgotPasswordViewModel
+            {
+                Email = txtPwEmail.Text,
+            };
+
+            var jsonData = JsonConvert.SerializeObject(model);
+
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            //Send request
+            var response = await client.PostAsync("https://localhost:7101/api/auth/ForgetPassword", content);
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            var responseObject = JsonConvert.DeserializeObject<UserManagerResponse>(responseBody);
         }
     }
 }

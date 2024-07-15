@@ -34,6 +34,8 @@
             btnLogin = new Button();
             lstWeatherForecast = new ListView();
             btnRegisterForm = new Button();
+            btnForgetPw = new Button();
+            txtPwEmail = new TextBox();
             SuspendLayout();
             // 
             // loginLbl
@@ -93,12 +95,32 @@
             btnRegisterForm.UseVisualStyleBackColor = true;
             btnRegisterForm.Click += btnRegisterForm_Click;
             // 
+            // btnForgetPw
+            // 
+            btnForgetPw.Location = new Point(113, 266);
+            btnForgetPw.Name = "btnForgetPw";
+            btnForgetPw.Size = new Size(136, 23);
+            btnForgetPw.TabIndex = 13;
+            btnForgetPw.Text = "Forgot Password?";
+            btnForgetPw.UseVisualStyleBackColor = true;
+            btnForgetPw.Click += btnForgetPw_Click;
+            // 
+            // txtPwEmail
+            // 
+            txtPwEmail.Location = new Point(130, 237);
+            txtPwEmail.Name = "txtPwEmail";
+            txtPwEmail.PlaceholderText = "Only Email";
+            txtPwEmail.Size = new Size(100, 23);
+            txtPwEmail.TabIndex = 14;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.MenuHighlight;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtPwEmail);
+            Controls.Add(btnForgetPw);
             Controls.Add(btnRegisterForm);
             Controls.Add(lstWeatherForecast);
             Controls.Add(loginLbl);
@@ -121,5 +143,7 @@
         private Button btnLogin;
         private ListView lstWeatherForecast;
         private Button btnRegisterForm;
+        private Button btnForgetPw;
+        private TextBox txtPwEmail;
     }
 }

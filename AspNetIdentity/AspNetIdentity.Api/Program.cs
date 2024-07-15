@@ -23,8 +23,9 @@ services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequiredLength = 5;
-}).AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
 
 //Authentication
 services.AddAuthentication(auth =>
@@ -49,9 +50,13 @@ services.AddAuthentication(auth =>
 services.AddScoped<IUserService, UserService>();
 services.AddTransient<IMailService, MailService>();
 
+//RazorPages
+services.AddRazorPages();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition(name: JwtBearerDefaults.AuthenticationScheme,
@@ -95,5 +100,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapRazorPages();
 
 app.Run();

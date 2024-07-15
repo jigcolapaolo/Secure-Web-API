@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetIdentity.Shared", "As
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetIdentity.Api", "AspNetIdentity.Api\AspNetIdentity.Api.csproj", "{E9F64467-B13E-4CDE-8BBD-2080963063A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetIdentity.Client", "AspNetIdentity.Client\AspNetIdentity.Client.csproj", "{69A6EDBF-83B5-4CF4-BD87-11A1A1B7D009}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetIdentity.Client", "AspNetIdentity.Client\AspNetIdentity.Client.csproj", "{69A6EDBF-83B5-4CF4-BD87-11A1A1B7D009}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
