@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AspNetIdentity.Shared
+namespace AspNetIdentity.Shared.IdentityAuth
 {
-    public class RegisterViewModel
+    public class LoginViewModel
     {
         [Required]
         [StringLength(50)]
@@ -16,8 +16,5 @@ namespace AspNetIdentity.Shared
         [Required]
         [StringLength(50, MinimumLength = 5)]
         public string Password { get; set; }
-        [Required]
-        [StringLength(50, MinimumLength = 5)]
-        public string ConfirmPassword { get; set; }
     }
 }

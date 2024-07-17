@@ -1,5 +1,6 @@
 ﻿using AspNetIdentity.Api.Services;
-using AspNetIdentity.Shared;
+using AspNetIdentity.Shared.IdentityAuth;
+using AspNetIdentity.Shared.IdentityAuth.Register;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
@@ -51,7 +52,7 @@ namespace AspNetIdentity.Api.Controllers
 
                 if (result.IsSuccess)
                 {
-                    await _mailService.SendEmailAsync("Jinbyos@Gmail.com", "Inicio de Sesión", _mailService.GetNewLoginNotification());
+                    //await _mailService.SendEmailAsync("Jinbyos@Gmail.com", "Inicio de Sesión", _mailService.GetNewLoginNotification());
 
                     return Ok(result);
                 }

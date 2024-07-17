@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AspNetIdentity.Shared
+namespace AspNetIdentity.Shared.IdentityAuth
 {
     public class UserManagerResponse
     {

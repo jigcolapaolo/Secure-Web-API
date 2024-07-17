@@ -1,4 +1,5 @@
 ﻿using AspNetIdentity.Shared;
+using AspNetIdentity.Shared.IdentityAuth;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

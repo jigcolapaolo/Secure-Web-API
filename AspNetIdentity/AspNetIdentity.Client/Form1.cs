@@ -1,4 +1,5 @@
-using AspNetIdentity.Shared;
+using AspNetIdentity.Shared.IdentityAuth;
+using AspNetIdentity.Shared.IdentityAuth.Register;
 using Newtonsoft.Json;
 using System.Text;
 

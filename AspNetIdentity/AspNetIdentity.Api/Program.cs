@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
+
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
@@ -18,12 +19,14 @@ var services = builder.Services;
 services.AddDbContext<ApplicationDbContext>(options =>
        options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 //Identity
-services.AddIdentity<IdentityUser, IdentityRole>(options =>
+services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
+    options.SignIn.RequireConfirmedAccount = true;
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequiredLength = 5;
 })
+.AddRoles<ApplicationRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
@@ -42,12 +45,15 @@ services.AddAuthentication(auth =>
         ValidAudience = configuration["AuthSettings:Audience"],
         ValidIssuer = configuration["AuthSettings:Issuer"],
         RequireExpirationTime = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AuthSettings:Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AuthSettings:Key"])),
+        ValidateIssuerSigningKey = true
     };
 });
 
 //Interfaces
 services.AddScoped<IUserService, UserService>();
+services.AddScoped<IEmployeeService, EmployeeService>();
+services.AddScoped<IAuthService, AuthService>();
 services.AddTransient<IMailService, MailService>();
 
 //RazorPages
@@ -101,5 +107,46 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapRazorPages();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager =
+        scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+
+    var roles = new[] { "Admin", "Manager", "Member" };
+
+    foreach(var role in roles)
+    {
+        //This conditional ensures the roles are unique
+        if (!await roleManager.RoleExistsAsync(role))
+            await roleManager.CreateAsync(new ApplicationRole(role));
+    }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    //Creating a default admin user with Admin role, one time
+    var userManager =
+        scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+    string email = "admin@admin.com";
+    string password = "Admin123-";
+
+    if(await userManager.FindByEmailAsync(email) == null)
+    {
+        var user = new ApplicationUser();
+        user.UserName = email;
+        user.Email = email;
+        user.EmailConfirmed = true;
+        user.FirstName = "Admin";
+        user.LastName = "Istrador";
+
+        await userManager.CreateAsync(user, password);
+
+        await userManager.AddToRoleAsync(user, "Admin");
+    }
+}
+
 
 app.Run();

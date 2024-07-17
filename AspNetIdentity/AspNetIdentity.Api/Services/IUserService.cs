@@ -1,4 +1,6 @@
-﻿using AspNetIdentity.Shared;
+﻿using AspNetIdentity.Api.Models;
+using AspNetIdentity.Shared.IdentityAuth;
+using AspNetIdentity.Shared.IdentityAuth.Register;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.IdentityModel.Tokens;
@@ -19,12 +21,12 @@ namespace AspNetIdentity.Api.Services
 
     public class UserService : IUserService
     {
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
         private IConfiguration _configuration;
         private IMailService _mailService;
 
         public UserService(
-            UserManager<IdentityUser> userManager,
+            UserManager<ApplicationUser> userManager,
             IConfiguration configuration,
             IMailService mailService)
         {
@@ -45,7 +47,7 @@ namespace AspNetIdentity.Api.Services
                     IsSuccess = false,
                 };
 
-            var identityUser = new IdentityUser
+            var identityUser = new ApplicationUser
             {
                 Email = model.Email,
                 UserName = model.Email
@@ -108,7 +110,7 @@ namespace AspNetIdentity.Api.Services
             var claims = new[]
             {
                 new Claim("Email", model.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                //new Claim(ClaimTypes.NameIdentifier, user.Id),
             };
 
             //SymmetricSecurityKey to create the token
