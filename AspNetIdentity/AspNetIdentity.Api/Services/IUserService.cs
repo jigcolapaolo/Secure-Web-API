@@ -107,11 +107,29 @@ namespace AspNetIdentity.Api.Services
                     IsSuccess = false,
                 };
 
-            var claims = new[]
+
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var roleClaims = new List<Claim>();
+
+            foreach (var role in roles)
+            {
+                roleClaims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            IEnumerable<Claim> claims = new[]
             {
                 new Claim("Email", model.Email),
-                //new Claim(ClaimTypes.NameIdentifier, user.Id),
-            };
+            }
+            .Union(userClaims)
+            .Union(roleClaims);
+
+            //var claims = new[]
+            //{
+            //    new Claim("Email", model.Email),
+            //    new Claim(ClaimTypes.NameIdentifier, user.Id),
+            //};
 
             //SymmetricSecurityKey to create the token
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));

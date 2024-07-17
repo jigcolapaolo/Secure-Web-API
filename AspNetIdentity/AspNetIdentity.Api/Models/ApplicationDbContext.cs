@@ -19,7 +19,7 @@ namespace AspNetIdentity.Api.Models
             builder.Entity<ApplicationUser>()
                 .HasOne(e => e.Employee)
                 .WithOne(u => u.ApplicationUser)
-                .HasForeignKey<Employee>(e => e.EmployeeId);
+                .HasForeignKey<ApplicationUser>(e => e.EmployeeId);
         }
     }
 }
